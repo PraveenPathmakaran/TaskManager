@@ -9,6 +9,7 @@ import '../view/scheduling/scheduling_screen.dart';
 
 class ScheduleController extends GetxController {
   RxList<WeekModel> allData = <WeekModel>[].obs;
+  RxList<WeekModel> prevData = <WeekModel>[].obs;
   RxBool isLoading = false.obs;
   final DbFunctions dbFunctions = DbFunctions();
   Future<void> getData() async {
@@ -16,10 +17,15 @@ class ScheduleController extends GetxController {
     allData.value = await dbFunctions.getDataFromDB();
   }
 
+  Future<void> getDataPrev() async {
+    prevData.value = await dbFunctions.getDataFromDBPrev();
+  }
+
   Future<String> updateDataToDb() async {
     isLoading.value = true;
     final String result = await dbFunctions.updateDataDb(allData);
     isLoading.value = false;
+    getDataPrev();
     return result;
   }
 

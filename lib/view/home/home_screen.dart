@@ -32,13 +32,48 @@ class HomeScreen extends StatelessWidget {
                             const TextWidget(
                                 title: 'Hi Jose you are available in\n',
                                 size: fontSizeText),
-                            availability('Sunday'),
-                            availability('Monday'),
-                            availability('Tuesday'),
-                            availability('Wednesday'),
-                            availability('Thursday'),
-                            availability('Friday'),
-                            availability('Saturday')
+                            Row(
+                              children: [
+                                availability('Sunday'),
+                                preAvailability('Sunday')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                availability('Monday'),
+                                preAvailability('Monday')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                availability('Tuesday'),
+                                preAvailability('Tuesday')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                availability('Wednesday'),
+                                preAvailability('Wednesday')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                availability('Thursday'),
+                                preAvailability('Thursday')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                availability('Friday'),
+                                preAvailability('Friday')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                availability('Saturday'),
+                                preAvailability('Saturday')
+                              ],
+                            ),
                           ],
                         ),
                       );

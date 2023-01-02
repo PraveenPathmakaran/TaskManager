@@ -11,6 +11,7 @@ void main() async {
     Hive.registerAdapter(WeekModelAdapter());
   }
   await Hive.openBox<WeekModel>(boxName);
+  await Hive.openBox<WeekModel>(prevBox);
 
   runApp(const MyApp());
 }

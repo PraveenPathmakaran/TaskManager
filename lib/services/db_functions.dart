@@ -79,14 +79,32 @@ class DbFunctions {
     return weekData;
   }
 
+  Future<List<WeekModel>> getDataFromDBPrev() async {
+    final Box<WeekModel> box = Hive.box<WeekModel>(prevBox);
+    final List<WeekModel> weekData = box.values.toList();
+    //for sorting week sun to sat
+    weekData.sort((WeekModel a, WeekModel b) => a.sort.compareTo(b.sort));
+
+    return weekData;
+  }
+
   Future<String> updateDataDb(List<WeekModel> weekList) async {
     final Box<WeekModel> box = Hive.box<WeekModel>(boxName);
+    final Box<WeekModel> prevbox = Hive.box<WeekModel>(prevBox);
+    final prevList = box.values.toList();
+    for (final WeekModel data in prevList) {
+      prevbox.put(data.id, data);
+    }
+    getDataFromDBPrev();
     if (weekList.isEmpty) {
       return 'error';
     }
     for (final WeekModel data in weekList) {
       box.put(data.id, data);
     }
+
+    print(weekList[0].morning);
+    print(prevList[0].morning);
 
     return 'success';
   }
